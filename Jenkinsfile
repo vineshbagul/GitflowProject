@@ -14,21 +14,21 @@ stages {
          stage('UNIT Testing'){
 
                     steps{
-                           bat 'mvn test'
+                           sh 'mvn test'
                         }
                     }
 
             stage('Integration Testing'){
 
                           steps{
-                              bat 'mvn verify -DskipUnitTests'
+                              sh 'mvn verify -DskipUnitTests'
                                       }
                                   }
 
              stage('Maven Build'){
 
                                 steps{
-                                   bat 'mvn clean install'
+                                   sh 'mvn clean install'
                                           }
                                        }
                 stage('Static code analysis'){
@@ -36,7 +36,7 @@ stages {
                                          steps{
                                             script {
                                               withSonarQubeEnv(credentialsId: 'sonar-api') {
-                                                    bat 'mvn clean package sonar:sonar '
+                                                    sh 'mvn clean package sonar:sonar '
                                                         }
                                                   }
                                              }
